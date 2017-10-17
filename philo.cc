@@ -16,12 +16,12 @@ static /*const*/ pearlrt::Fixed<31>         CONSTANT_FIXED_NEG_1_31(-1);
 static /*const*/ pearlrt::Fixed<31>         CONSTANT_FIXED_POS_10_31(10);
 static /*const*/ pearlrt::Fixed<31>         CONSTANT_FIXED_POS_5_31(5);
 static /*const*/ pearlrt::Fixed<31>         CONSTANT_FIXED_POS_3_31(3);
-static /*const*/ pearlrt::Character<7>         CONSTANT_CHARACTER_d7a31e63_395f_4792_bb4b_0c80afdee0e7("STARTET");
-static /*const*/ pearlrt::Character<12>         CONSTANT_CHARACTER_97de995d_ea2e_4ea9_9b63_3abeb7904108("Phil1 - Isst");
-static /*const*/ pearlrt::Character<12>         CONSTANT_CHARACTER_c89d778f_b260_4f6d_9e70_49b0c71a19b7("Phil2 - Isst");
-static /*const*/ pearlrt::Character<12>         CONSTANT_CHARACTER_841d59d2_ab16_4e51_9893_fd4a6cce1243("Phil3 - Isst");
-static /*const*/ pearlrt::Character<12>         CONSTANT_CHARACTER_72c277a2_0cf9_4a67_9d38_072aa3810f67("Phil4 - Isst");
-static /*const*/ pearlrt::Character<12>         CONSTANT_CHARACTER_a4334fe8_d17c_4da1_b03d_9885a58448a5("Phil5 - Isst");
+static /*const*/ pearlrt::Character<7>         CONSTANT_CHARACTER_54a663f6_307d_4d56_ae65_81176b729394("STARTET");
+static /*const*/ pearlrt::Character<12>         CONSTANT_CHARACTER_5f419ae7_3281_4b45_a751_cae747e36702("Phil1 - Isst");
+static /*const*/ pearlrt::Character<12>         CONSTANT_CHARACTER_299feea1_3d62_4c56_954a_a30c478956c9("Phil2 - Isst");
+static /*const*/ pearlrt::Character<12>         CONSTANT_CHARACTER_aff67052_f3bd_41fd_b4de_91679c7340f6("Phil3 - Isst");
+static /*const*/ pearlrt::Character<12>         CONSTANT_CHARACTER_b2b90ced_fcbb_4219_ad1c_dd855b9ccde2("Phil4 - Isst");
+static /*const*/ pearlrt::Character<12>         CONSTANT_CHARACTER_a0835750_493b_42c1_88f6_363d24c9a687("Phil5 - Isst");
 
 /////////////////////////////////////////////////////////////////////////////
 // TASK SPECIFIERS
@@ -67,12 +67,14 @@ DCLSEMA(_g2,1);
 DCLSEMA(_g3,1);
 DCLSEMA(_g4,1);
 DCLSEMA(_g5,1);
+DCLSEMA(_console,1);
 
 
 /////////////////////////////////////////////////////////////////////////////
 // TEMPORARY SEMAPHORE ARRAYS
 /////////////////////////////////////////////////////////////////////////////
 static pearlrt::Semaphore *g1_g2_semas[] = {&_g1,&_g2}; 
+static pearlrt::Semaphore *console_semas[] = {&_console}; 
 static pearlrt::Semaphore *g2_g3_semas[] = {&_g2,&_g3}; 
 static pearlrt::Semaphore *g3_g4_semas[] = {&_g3,&_g4}; 
 static pearlrt::Semaphore *g4_g5_semas[] = {&_g4,&_g5}; 
@@ -93,7 +95,7 @@ static pearlrt::Semaphore *g5_semas[] = {&_g5};
 // TASK DECLARATIONS
 /////////////////////////////////////////////////////////////////////////////
 DCLTASK(_main, (pearlrt::Prio( (pearlrt::Fixed<15>)CONSTANT_FIXED_POS_10_31)), ((pearlrt::BitString<1>)1)) {
-        me->setLocation(16, filename);
+        me->setLocation(17, filename);
         {
             _termout.dationOpen(
                 0
@@ -102,11 +104,11 @@ DCLTASK(_main, (pearlrt::Prio( (pearlrt::Fixed<15>)CONSTANT_FIXED_POS_10_31)), (
             );
         }
 
-        me->setLocation(17, filename);
+        me->setLocation(18, filename);
         // PUT STATEMENT BEGIN
         try {
             _termout.beginSequence(me);
-            _termout.toA(CONSTANT_CHARACTER_d7a31e63_395f_4792_bb4b_0c80afdee0e7) ;
+            _termout.toA(CONSTANT_CHARACTER_54a663f6_307d_4d56_ae65_81176b729394) ;
             _termout.toSkip((pearlrt::Fixed<31>)(CONSTANT_FIXED_POS_1_31));
             _termout.endSequence();
         }
@@ -119,10 +121,10 @@ DCLTASK(_main, (pearlrt::Prio( (pearlrt::Fixed<15>)CONSTANT_FIXED_POS_10_31)), (
         }
         // PUT STATEMENT END
 
-        me->setLocation(18, filename);
+        me->setLocation(19, filename);
         _termout.dationClose(0, (pearlrt::Fixed<15>*) 0);
 
-        me->setLocation(19, filename);
+        me->setLocation(20, filename);
             _p1.activate( me,
                               0,
                               /* prio   */  pearlrt::Prio(),
@@ -133,7 +135,7 @@ DCLTASK(_main, (pearlrt::Prio( (pearlrt::Fixed<15>)CONSTANT_FIXED_POS_10_31)), (
                               /* during */  pearlrt::Duration()
                             );
 
-        me->setLocation(20, filename);
+        me->setLocation(21, filename);
             _p2.activate( me,
                               0,
                               /* prio   */  pearlrt::Prio(),
@@ -144,7 +146,7 @@ DCLTASK(_main, (pearlrt::Prio( (pearlrt::Fixed<15>)CONSTANT_FIXED_POS_10_31)), (
                               /* during */  pearlrt::Duration()
                             );
 
-        me->setLocation(21, filename);
+        me->setLocation(22, filename);
             _p3.activate( me,
                               0,
                               /* prio   */  pearlrt::Prio(),
@@ -155,7 +157,7 @@ DCLTASK(_main, (pearlrt::Prio( (pearlrt::Fixed<15>)CONSTANT_FIXED_POS_10_31)), (
                               /* during */  pearlrt::Duration()
                             );
 
-        me->setLocation(22, filename);
+        me->setLocation(23, filename);
             _p4.activate( me,
                               0,
                               /* prio   */  pearlrt::Prio(),
@@ -166,7 +168,7 @@ DCLTASK(_main, (pearlrt::Prio( (pearlrt::Fixed<15>)CONSTANT_FIXED_POS_10_31)), (
                               /* during */  pearlrt::Duration()
                             );
 
-        me->setLocation(23, filename);
+        me->setLocation(24, filename);
             _p5.activate( me,
                               0,
                               /* prio   */  pearlrt::Prio(),
@@ -179,7 +181,7 @@ DCLTASK(_main, (pearlrt::Prio( (pearlrt::Fixed<15>)CONSTANT_FIXED_POS_10_31)), (
 
 }
 DCLTASK(_p1, (pearlrt::Prio( (pearlrt::Fixed<15>)CONSTANT_FIXED_POS_5_31)), ((pearlrt::BitString<1>)0)) {
-        me->setLocation(26, filename);
+        me->setLocation(27, filename);
         {
             pearlrt::Fixed<15> a_value(1);
 
@@ -194,11 +196,13 @@ DCLTASK(_p1, (pearlrt::Prio( (pearlrt::Fixed<15>)CONSTANT_FIXED_POS_5_31)), ((pe
                         ((a_value >= e_value).getBoolean())))
                 {
 
-                    me->setLocation(26, filename);
-                        ;
                     me->setLocation(27, filename);
-                        pearlrt::Semaphore::request( me, 2, g1_g2_semas);
+                        ;
                     me->setLocation(28, filename);
+                        pearlrt::Semaphore::request( me, 2, g1_g2_semas);
+                    me->setLocation(29, filename);
+                        pearlrt::Semaphore::request( me, 1, console_semas);
+                    me->setLocation(30, filename);
                     {
                         _termout.dationOpen(
                             0
@@ -207,11 +211,11 @@ DCLTASK(_p1, (pearlrt::Prio( (pearlrt::Fixed<15>)CONSTANT_FIXED_POS_5_31)), ((pe
                         );
                     }
 
-                    me->setLocation(29, filename);
+                    me->setLocation(31, filename);
                     // PUT STATEMENT BEGIN
                     try {
                         _termout.beginSequence(me);
-                        _termout.toA(CONSTANT_CHARACTER_97de995d_ea2e_4ea9_9b63_3abeb7904108) ;
+                        _termout.toA(CONSTANT_CHARACTER_5f419ae7_3281_4b45_a751_cae747e36702) ;
                         _termout.toSkip((pearlrt::Fixed<31>)(CONSTANT_FIXED_POS_1_31));
                         _termout.endSequence();
                     }
@@ -224,19 +228,21 @@ DCLTASK(_p1, (pearlrt::Prio( (pearlrt::Fixed<15>)CONSTANT_FIXED_POS_5_31)), ((pe
                     }
                     // PUT STATEMENT END
 
-                    me->setLocation(30, filename);
+                    me->setLocation(32, filename);
                     _termout.dationClose(0, (pearlrt::Fixed<15>*) 0);
 
-                    me->setLocation(31, filename);
+                    me->setLocation(33, filename);
+                        pearlrt::Semaphore::release( me, 1, console_semas);
+                    me->setLocation(34, filename);
                         me->resume( pearlrt::Task::AFTER,
                                     /* at     */  pearlrt::Clock(),
                                     /* after  */  pearlrt::Duration(pearlrt::Duration(1.0))
                                   );
 
-                    me->setLocation(32, filename);
+                    me->setLocation(35, filename);
                         pearlrt::Semaphore::release( me, 2, g1_g2_semas);
 
-                    me->setLocation(26, filename);
+                    me->setLocation(27, filename);
 
                     if (((s_value > CONSTANT_FIXED_POS_0_31).getBoolean() &&
                          (a_value <= (e_value - s_value)).getBoolean()) ||
@@ -250,7 +256,7 @@ DCLTASK(_p1, (pearlrt::Prio( (pearlrt::Fixed<15>)CONSTANT_FIXED_POS_5_31)), ((pe
         }
 }
 DCLTASK(_p2, (pearlrt::Prio( (pearlrt::Fixed<15>)CONSTANT_FIXED_POS_5_31)), ((pearlrt::BitString<1>)0)) {
-        me->setLocation(36, filename);
+        me->setLocation(39, filename);
         {
             pearlrt::Fixed<15> a_value(1);
 
@@ -265,11 +271,13 @@ DCLTASK(_p2, (pearlrt::Prio( (pearlrt::Fixed<15>)CONSTANT_FIXED_POS_5_31)), ((pe
                         ((a_value >= e_value).getBoolean())))
                 {
 
-                    me->setLocation(36, filename);
+                    me->setLocation(39, filename);
                         ;
-                    me->setLocation(37, filename);
+                    me->setLocation(40, filename);
                         pearlrt::Semaphore::request( me, 2, g2_g3_semas);
-                    me->setLocation(38, filename);
+                    me->setLocation(41, filename);
+                        pearlrt::Semaphore::request( me, 1, console_semas);
+                    me->setLocation(42, filename);
                     {
                         _termout.dationOpen(
                             0
@@ -278,11 +286,11 @@ DCLTASK(_p2, (pearlrt::Prio( (pearlrt::Fixed<15>)CONSTANT_FIXED_POS_5_31)), ((pe
                         );
                     }
 
-                    me->setLocation(39, filename);
+                    me->setLocation(43, filename);
                     // PUT STATEMENT BEGIN
                     try {
                         _termout.beginSequence(me);
-                        _termout.toA(CONSTANT_CHARACTER_c89d778f_b260_4f6d_9e70_49b0c71a19b7) ;
+                        _termout.toA(CONSTANT_CHARACTER_299feea1_3d62_4c56_954a_a30c478956c9) ;
                         _termout.toSkip((pearlrt::Fixed<31>)(CONSTANT_FIXED_POS_1_31));
                         _termout.endSequence();
                     }
@@ -295,19 +303,21 @@ DCLTASK(_p2, (pearlrt::Prio( (pearlrt::Fixed<15>)CONSTANT_FIXED_POS_5_31)), ((pe
                     }
                     // PUT STATEMENT END
 
-                    me->setLocation(40, filename);
+                    me->setLocation(44, filename);
                     _termout.dationClose(0, (pearlrt::Fixed<15>*) 0);
 
-                    me->setLocation(41, filename);
+                    me->setLocation(45, filename);
+                        pearlrt::Semaphore::release( me, 1, console_semas);
+                    me->setLocation(46, filename);
                         me->resume( pearlrt::Task::AFTER,
                                     /* at     */  pearlrt::Clock(),
                                     /* after  */  pearlrt::Duration(pearlrt::Duration(1.0))
                                   );
 
-                    me->setLocation(42, filename);
+                    me->setLocation(47, filename);
                         pearlrt::Semaphore::release( me, 2, g2_g3_semas);
 
-                    me->setLocation(36, filename);
+                    me->setLocation(39, filename);
 
                     if (((s_value > CONSTANT_FIXED_POS_0_31).getBoolean() &&
                          (a_value <= (e_value - s_value)).getBoolean()) ||
@@ -321,7 +331,7 @@ DCLTASK(_p2, (pearlrt::Prio( (pearlrt::Fixed<15>)CONSTANT_FIXED_POS_5_31)), ((pe
         }
 }
 DCLTASK(_p3, (pearlrt::Prio( (pearlrt::Fixed<15>)CONSTANT_FIXED_POS_5_31)), ((pearlrt::BitString<1>)0)) {
-        me->setLocation(46, filename);
+        me->setLocation(51, filename);
         {
             pearlrt::Fixed<15> a_value(1);
 
@@ -336,11 +346,13 @@ DCLTASK(_p3, (pearlrt::Prio( (pearlrt::Fixed<15>)CONSTANT_FIXED_POS_5_31)), ((pe
                         ((a_value >= e_value).getBoolean())))
                 {
 
-                    me->setLocation(46, filename);
+                    me->setLocation(51, filename);
                         ;
-                    me->setLocation(47, filename);
+                    me->setLocation(52, filename);
                         pearlrt::Semaphore::request( me, 2, g3_g4_semas);
-                    me->setLocation(48, filename);
+                    me->setLocation(53, filename);
+                        pearlrt::Semaphore::request( me, 1, console_semas);
+                    me->setLocation(54, filename);
                     {
                         _termout.dationOpen(
                             0
@@ -349,11 +361,11 @@ DCLTASK(_p3, (pearlrt::Prio( (pearlrt::Fixed<15>)CONSTANT_FIXED_POS_5_31)), ((pe
                         );
                     }
 
-                    me->setLocation(49, filename);
+                    me->setLocation(55, filename);
                     // PUT STATEMENT BEGIN
                     try {
                         _termout.beginSequence(me);
-                        _termout.toA(CONSTANT_CHARACTER_841d59d2_ab16_4e51_9893_fd4a6cce1243) ;
+                        _termout.toA(CONSTANT_CHARACTER_aff67052_f3bd_41fd_b4de_91679c7340f6) ;
                         _termout.toSkip((pearlrt::Fixed<31>)(CONSTANT_FIXED_POS_1_31));
                         _termout.endSequence();
                     }
@@ -366,19 +378,21 @@ DCLTASK(_p3, (pearlrt::Prio( (pearlrt::Fixed<15>)CONSTANT_FIXED_POS_5_31)), ((pe
                     }
                     // PUT STATEMENT END
 
-                    me->setLocation(50, filename);
+                    me->setLocation(56, filename);
                     _termout.dationClose(0, (pearlrt::Fixed<15>*) 0);
 
-                    me->setLocation(51, filename);
+                    me->setLocation(57, filename);
+                        pearlrt::Semaphore::release( me, 1, console_semas);
+                    me->setLocation(58, filename);
                         me->resume( pearlrt::Task::AFTER,
                                     /* at     */  pearlrt::Clock(),
                                     /* after  */  pearlrt::Duration(pearlrt::Duration(1.0))
                                   );
 
-                    me->setLocation(52, filename);
+                    me->setLocation(59, filename);
                         pearlrt::Semaphore::release( me, 2, g3_g4_semas);
 
-                    me->setLocation(46, filename);
+                    me->setLocation(51, filename);
 
                     if (((s_value > CONSTANT_FIXED_POS_0_31).getBoolean() &&
                          (a_value <= (e_value - s_value)).getBoolean()) ||
@@ -392,7 +406,7 @@ DCLTASK(_p3, (pearlrt::Prio( (pearlrt::Fixed<15>)CONSTANT_FIXED_POS_5_31)), ((pe
         }
 }
 DCLTASK(_p4, (pearlrt::Prio( (pearlrt::Fixed<15>)CONSTANT_FIXED_POS_5_31)), ((pearlrt::BitString<1>)0)) {
-        me->setLocation(56, filename);
+        me->setLocation(63, filename);
         {
             pearlrt::Fixed<15> a_value(1);
 
@@ -407,11 +421,13 @@ DCLTASK(_p4, (pearlrt::Prio( (pearlrt::Fixed<15>)CONSTANT_FIXED_POS_5_31)), ((pe
                         ((a_value >= e_value).getBoolean())))
                 {
 
-                    me->setLocation(56, filename);
+                    me->setLocation(63, filename);
                         ;
-                    me->setLocation(57, filename);
+                    me->setLocation(64, filename);
                         pearlrt::Semaphore::request( me, 2, g4_g5_semas);
-                    me->setLocation(58, filename);
+                    me->setLocation(65, filename);
+                        pearlrt::Semaphore::request( me, 1, console_semas);
+                    me->setLocation(66, filename);
                     {
                         _termout.dationOpen(
                             0
@@ -420,11 +436,11 @@ DCLTASK(_p4, (pearlrt::Prio( (pearlrt::Fixed<15>)CONSTANT_FIXED_POS_5_31)), ((pe
                         );
                     }
 
-                    me->setLocation(59, filename);
+                    me->setLocation(67, filename);
                     // PUT STATEMENT BEGIN
                     try {
                         _termout.beginSequence(me);
-                        _termout.toA(CONSTANT_CHARACTER_72c277a2_0cf9_4a67_9d38_072aa3810f67) ;
+                        _termout.toA(CONSTANT_CHARACTER_b2b90ced_fcbb_4219_ad1c_dd855b9ccde2) ;
                         _termout.toSkip((pearlrt::Fixed<31>)(CONSTANT_FIXED_POS_1_31));
                         _termout.endSequence();
                     }
@@ -437,19 +453,21 @@ DCLTASK(_p4, (pearlrt::Prio( (pearlrt::Fixed<15>)CONSTANT_FIXED_POS_5_31)), ((pe
                     }
                     // PUT STATEMENT END
 
-                    me->setLocation(60, filename);
+                    me->setLocation(68, filename);
                     _termout.dationClose(0, (pearlrt::Fixed<15>*) 0);
 
-                    me->setLocation(61, filename);
+                    me->setLocation(69, filename);
+                        pearlrt::Semaphore::release( me, 1, console_semas);
+                    me->setLocation(70, filename);
                         me->resume( pearlrt::Task::AFTER,
                                     /* at     */  pearlrt::Clock(),
                                     /* after  */  pearlrt::Duration(pearlrt::Duration(1.0))
                                   );
 
-                    me->setLocation(62, filename);
+                    me->setLocation(71, filename);
                         pearlrt::Semaphore::release( me, 2, g4_g5_semas);
 
-                    me->setLocation(56, filename);
+                    me->setLocation(63, filename);
 
                     if (((s_value > CONSTANT_FIXED_POS_0_31).getBoolean() &&
                          (a_value <= (e_value - s_value)).getBoolean()) ||
@@ -463,7 +481,7 @@ DCLTASK(_p4, (pearlrt::Prio( (pearlrt::Fixed<15>)CONSTANT_FIXED_POS_5_31)), ((pe
         }
 }
 DCLTASK(_p5, (pearlrt::Prio( (pearlrt::Fixed<15>)CONSTANT_FIXED_POS_5_31)), ((pearlrt::BitString<1>)0)) {
-        me->setLocation(66, filename);
+        me->setLocation(75, filename);
         {
             pearlrt::Fixed<15> a_value(1);
 
@@ -478,13 +496,15 @@ DCLTASK(_p5, (pearlrt::Prio( (pearlrt::Fixed<15>)CONSTANT_FIXED_POS_5_31)), ((pe
                         ((a_value >= e_value).getBoolean())))
                 {
 
-                    me->setLocation(66, filename);
+                    me->setLocation(75, filename);
                         ;
-                    me->setLocation(67, filename);
+                    me->setLocation(76, filename);
                         pearlrt::Semaphore::request( me, 1, g1_semas);
-                    me->setLocation(68, filename);
+                    me->setLocation(77, filename);
                         pearlrt::Semaphore::request( me, 1, g5_semas);
-                    me->setLocation(69, filename);
+                    me->setLocation(78, filename);
+                        pearlrt::Semaphore::request( me, 1, console_semas);
+                    me->setLocation(79, filename);
                     {
                         _termout.dationOpen(
                             0
@@ -493,11 +513,11 @@ DCLTASK(_p5, (pearlrt::Prio( (pearlrt::Fixed<15>)CONSTANT_FIXED_POS_5_31)), ((pe
                         );
                     }
 
-                    me->setLocation(70, filename);
+                    me->setLocation(80, filename);
                     // PUT STATEMENT BEGIN
                     try {
                         _termout.beginSequence(me);
-                        _termout.toA(CONSTANT_CHARACTER_a4334fe8_d17c_4da1_b03d_9885a58448a5) ;
+                        _termout.toA(CONSTANT_CHARACTER_a0835750_493b_42c1_88f6_363d24c9a687) ;
                         _termout.toSkip((pearlrt::Fixed<31>)(CONSTANT_FIXED_POS_1_31));
                         _termout.endSequence();
                     }
@@ -510,15 +530,23 @@ DCLTASK(_p5, (pearlrt::Prio( (pearlrt::Fixed<15>)CONSTANT_FIXED_POS_5_31)), ((pe
                     }
                     // PUT STATEMENT END
 
-                    me->setLocation(71, filename);
+                    me->setLocation(81, filename);
                     _termout.dationClose(0, (pearlrt::Fixed<15>*) 0);
 
-                    me->setLocation(72, filename);
+                    me->setLocation(82, filename);
+                        pearlrt::Semaphore::release( me, 1, console_semas);
+                    me->setLocation(83, filename);
+                        me->resume( pearlrt::Task::AFTER,
+                                    /* at     */  pearlrt::Clock(),
+                                    /* after  */  pearlrt::Duration(pearlrt::Duration(1.0))
+                                  );
+
+                    me->setLocation(84, filename);
                         pearlrt::Semaphore::release( me, 1, g1_semas);
-                    me->setLocation(73, filename);
+                    me->setLocation(85, filename);
                         pearlrt::Semaphore::release( me, 1, g5_semas);
 
-                    me->setLocation(66, filename);
+                    me->setLocation(75, filename);
 
                     if (((s_value > CONSTANT_FIXED_POS_0_31).getBoolean() &&
                          (a_value <= (e_value - s_value)).getBoolean()) ||
