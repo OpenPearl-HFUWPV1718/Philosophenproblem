@@ -1,0 +1,76 @@
+/*
+Philosophen Prolem
+*/
+
+MODULE(mhello);
+
+SYSTEM;
+   stdout: StdOut;
+
+PROBLEM;
+	SPC stdout DATION OUT SYSTEM ALPHIC;
+	DCL termout DATION OUT ALPHIC DIM(*,80) FORWARD STREAM CREATED(stdout);
+	DCL (g1,g2,g3,g4,g5) SEMA PRESET(1,1,1,1,1);
+!Bla
+main: TASK PRIO 10 MAIN;
+	OPEN termout;
+	PUT 'STARTET' TO termout BY A, SKIP;
+	CLOSE termout;
+	ACTIVATE p1;
+	ACTIVATE p2;
+	ACTIVATE p3;
+	ACTIVATE p4;
+	ACTIVATE p5;
+END;
+p1: TASK PRIO 5;
+	TO 3 REPEAT;
+	REQUEST g1,g2;
+	OPEN termout;
+	PUT 'Phil1 - Isst' TO termout BY A, SKIP;
+	CLOSE termout;
+	AFTER 1 SEC RESUME;
+	RELEASE g1,g2;
+	END;
+END;
+p2: TASK PRIO 5;
+	TO 3 REPEAT;
+	REQUEST g2,g3;
+	OPEN termout;
+	PUT 'Phil2 - Isst' TO termout BY A, SKIP;
+	CLOSE termout;
+	AFTER 1 SEC RESUME;
+	RELEASE g2,g3;
+	END;
+END;
+p3: TASK PRIO 5;
+	TO 3 REPEAT;
+	REQUEST g3,g4;
+	OPEN termout;
+	PUT 'Phil3 - Isst' TO termout BY A, SKIP;
+	CLOSE termout;
+	AFTER 1 SEC RESUME;
+	RELEASE g3,g4;
+	END;
+END;
+p4: TASK PRIO 5;
+	TO 3 REPEAT;
+	REQUEST g4,g5;
+	OPEN termout;
+	PUT 'Phil4 - Isst' TO termout BY A, SKIP;
+	CLOSE termout;
+	AFTER 1 SEC RESUME;
+	RELEASE g4,g5;
+	END;
+END;
+p5: TASK PRIO 5;
+	TO 3 REPEAT;
+	REQUEST g1;
+	REQUEST g5;
+	OPEN termout;
+	PUT 'Phil5 - Isst' TO termout BY A, SKIP;
+	CLOSE termout;
+	RELEASE g1;
+	RELEASE g5;
+	END;
+END;
+MODEND;
