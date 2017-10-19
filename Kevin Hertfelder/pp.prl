@@ -1,0 +1,92 @@
+MODULE (PHILOSOPHENPROBLEM);
+    SYSTEM;
+        stdout:StdOut;
+
+    PROBLEM;
+        SPC stdout DATION OUT SYSTEM ALPHIC;
+		DCL syso DATION OUT ALPHIC DIM(*,80) FORWARD STREAM CREATED(stdout);
+		DCL (gabel1_sema, gabel2_sema, gabel3_sema, gabel4_sema, gabel5_sema) SEMA PRESET(1,1,1,1,1);
+		DCL syso_sema SEMA PRESET(1);
+	
+	main:TASK PRIO 1 MAIN;
+		CALL print ( 'START!');
+		ACTIVATE philosoph1;
+		ACTIVATE philosoph2;
+		ACTIVATE philosoph3;
+		ACTIVATE philosoph4;
+		ACTIVATE philosoph5;
+	END;
+	
+	print:PROC(text CHAR(18));
+		REQUEST syso_sema;
+		OPEN syso;
+		PUT text TO syso BY A, SKIP;
+		CLOSE syso;
+		RELEASE syso_sema;
+	END;
+	
+	philosoph1:TASK PRIO 10;
+		TO 3 
+		REPEAT
+			REQUEST gabel1_sema, gabel2_sema;
+			CALL print ('Philosoph 1 isst!');
+			AFTER 1 SEC RESUME;
+			RELEASE gabel1_sema, gabel2_sema;
+			
+			CALL print ('Philosoph 1 denkt!');
+			AFTER 1 SEC RESUME;
+		END;
+	END;
+	
+	philosoph2:TASK PRIO 10;
+		TO 3 
+		REPEAT
+			REQUEST gabel2_sema, gabel3_sema;
+			CALL print ('Philosoph 2 isst!');
+			AFTER 1 SEC RESUME;
+			RELEASE gabel2_sema, gabel3_sema;
+			
+			CALL print ('Philosoph 2 denkt!');
+			AFTER 1 SEC RESUME;
+		END;
+	END;
+	
+	philosoph3:TASK PRIO 10;
+		TO 3 
+		REPEAT
+			REQUEST gabel3_sema, gabel4_sema;
+			CALL print ('Philosoph 3 isst!');
+			AFTER 1 SEC RESUME;
+			RELEASE gabel3_sema, gabel4_sema;
+			
+			CALL print ('Philosoph 3 denkt!');
+			AFTER 1 SEC RESUME;
+		END;
+	END;
+	
+	philosoph4:TASK PRIO 10;
+		TO 3 
+		REPEAT
+			REQUEST gabel4_sema, gabel5_sema;
+			CALL print ('Philosoph 4 isst!');
+			AFTER 1 SEC RESUME;
+			RELEASE gabel4_sema, gabel5_sema;
+			
+			CALL print ('Philosoph 4 denkt!');
+			AFTER 1 SEC RESUME;
+		END;
+	END;
+
+	philosoph5:TASK PRIO 10;
+		TO 3 
+		REPEAT
+			REQUEST gabel5_sema, gabel1_sema;
+			CALL print ('Philosoph 5 isst!');
+			AFTER 1 SEC RESUME;
+			RELEASE gabel5_sema, gabel1_sema;
+			
+			CALL print ('Philosoph 5 denkt!');
+			AFTER 1 SEC RESUME;
+		END;
+	END;
+MODEND;
