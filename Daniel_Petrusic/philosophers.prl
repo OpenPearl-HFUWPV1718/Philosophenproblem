@@ -1,5 +1,5 @@
 MODULE(philosophers);
-https://github.com/OpenPearl-HFUWPV1718/Philosophenproblem.git
+
 SYSTEM;
    stdout: StdOut;
 
@@ -7,12 +7,8 @@ PROBLEM;
    SPC stdout DATION OUT SYSTEM ALPHIC GLOBAL;
    DCL termout DATION OUT ALPHIC DIM(*, 80) FORWARD STREAM CREATED(stdout);
    DCL semaTermout SEMA PRESET(1);
-
-   DCL semaFork1 SEMA PRESET(1);
-   DCL semaFork2 SEMA PRESET(1);
-   DCL semaFork3 SEMA PRESET(1);
-   DCL semaFork4 SEMA PRESET(1);
-   DCL semaFork5 SEMA PRESET(1);
+   
+   DCL (semaFork1, semaFork2, semaFork3, semaFork4, semaFork5) SEMA PRESET (1, 1, 1, 1, 1);
    
    eat: PROC(num FIXED);	  
       REQUEST semaTermout;
@@ -51,9 +47,9 @@ END;
 
 taskPhilo2: TASK PRIO 5;
    TO 3 REPEAT
-      REQUEST semaFork1, semaFork2;
+      REQUEST semaFork2, semaFork1;
       CALL eat(2);
-      RELEASE semaFork1, semaFork2;
+      RELEASE semaFork2, semaFork1;
       CALL think(2);
    END;
 END;
