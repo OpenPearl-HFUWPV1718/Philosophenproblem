@@ -1,0 +1,145 @@
+/*
+Philosophenproblem_Daniel_Schlageter
+*/
+
+MODULE(philosophers);
+
+SYSTEM;
+   stdout: StdOut;
+   stdin: StdIn;
+
+PROBLEM;
+    ! Output
+    SPC stdout DATION OUT SYSTEM ALPHIC GLOBAL;
+    DCL termout DATION OUT ALPHIC DIM(*,80) FORWARD STREAM CREATED(stdout);
+
+    ! Input
+    SPC stdin DATION IN SYSTEM ALPHIC GLOBAL;
+    DCL termin DATION IN ALPHIC DIM(*,80) FORWARD STREAM CREATED(stdin);
+
+    ! Semaphoren ("Gabeln")
+    DCL (g1, g2, g3, g4, g5) SEMA PRESET(1,1,1,1,1);
+    DCL (e1, e2, e3, e4, e5) FIXED;
+    DCL (timeone, timeall) DUR;
+
+
+! the task main is started automatically due to the attribute 'MAIN'
+main: TASK MAIN;
+   
+   DCL input FLOAT;
+
+   OPEN termout;
+   PUT 'Welcome to the Problem of the Dining Philosophers in OpenPEARL!' TO termout BY A, SKIP, SKIP;
+
+   ! Input of timing variables
+   OPEN termin;
+   PUT 'How long should one philosopher eat? (in seconds)' TO termout BY A, SKIP;
+   GET input FROM termin BY F(6), SKIP;
+   timeone = 1 SEC;
+   timeone = timeone * input;
+
+   PUT 'How long should the program run? (in seconds)' TO termout BY A, SKIP;
+   GET input FROM termin BY F(6), SKIP;
+   timeall = 1 SEC;
+   timeall = timeall * input;
+
+   CLOSE termin;
+   
+   PUT 'Starting simulation...' TO termout BY A, SKIP;
+
+   ACTIVATE philosopher1; 
+   ACTIVATE philosopher2;
+   ACTIVATE philosopher3;
+   ACTIVATE philosopher4;
+   ACTIVATE philosopher5;
+
+   AFTER timeall RESUME;
+
+   TERMINATE philosopher1;
+   TERMINATE philosopher2;
+   TERMINATE philosopher3;
+   TERMINATE philosopher4;
+   TERMINATE philosopher5;
+
+   PUT 'Simulation finished.' TO termout BY A, SKIP, SKIP;
+
+   PUT 'Philosopher 1 has eaten ' TO termout BY A;
+   PUT e1 TO termout BY F(2);
+   PUT ' times.' TO termout BY A, SKIP;
+
+   PUT 'Philosopher 2 has eaten ' TO termout BY A;
+   PUT e2 TO termout BY F(2);
+   PUT ' times.' TO termout BY A, SKIP;
+
+   PUT 'Philosopher 3 has eaten ' TO termout BY A;
+   PUT e3 TO termout BY F(2);
+   PUT ' times.' TO termout BY A, SKIP;
+
+   PUT 'Philosopher 4 has eaten ' TO termout BY A;
+   PUT e4 TO termout BY F(2);
+   PUT ' times.' TO termout BY A, SKIP;
+
+   PUT 'Philosopher 5 has eaten ' TO termout BY A;
+   PUT e5 TO termout BY F(2);
+   PUT ' times.' TO termout BY A, SKIP, SKIP;
+
+   CLOSE termout;
+END;
+
+philosopher1: TASK;
+   REPEAT;
+      REQUEST g1, g2;
+      PUT 'Philosopher 1 starts eating...' TO termout BY A, SKIP;
+      e1 = e1 + 1;
+      AFTER timeone RESUME;
+      !PUT 'Philosopher 1 stops eating...' TO termout BY A, SKIP;
+      RELEASE g1, g2;
+   END;
+END;
+
+philosopher2: TASK;
+   REPEAT;
+      REQUEST g2, g3;
+      PUT 'Philosopher 2 starts eating...' TO termout BY A, SKIP;
+      e2 = e2 + 1;
+      AFTER timeone RESUME;
+      !PUT 'Philosopher 2 stops eating...' TO termout BY A, SKIP;
+      RELEASE g2, g3;
+   END;
+END;
+
+philosopher3: TASK;
+   REPEAT;   
+      REQUEST g3, g4;
+      PUT 'Philosopher 3 starts eating...' TO termout BY A, SKIP;
+      e3 = e3 + 1;
+      AFTER timeone RESUME;
+      !PUT 'Philosopher 3 stops eating...' TO termout BY A, SKIP;
+      RELEASE g3, g4;
+   END;
+END;
+
+philosopher4: TASK;
+   REPEAT;
+      REQUEST g4, g5;
+      PUT 'Philosopher 4 starts eating...' TO termout BY A, SKIP;
+      e4 = e4 + 1;
+      AFTER timeone RESUME;
+      !PUT 'Philosopher 4 stops eating...' TO termout BY A, SKIP;
+      RELEASE g4, g5;
+   END;
+END;
+
+philosopher5: TASK;
+   REPEAT;
+      REQUEST g5, g1;
+      PUT 'Philosopher 5 starts eating...' TO termout BY A, SKIP;
+      e5 = e5 + 1;
+      AFTER timeone RESUME;
+      !PUT 'Philosopher 5 stops eating...' TO termout BY A, SKIP;
+      RELEASE g5, g1;
+   END;
+END;
+
+
+MODEND;
